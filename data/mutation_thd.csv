@@ -1,0 +1,11 @@
+,testing 20 nodes,testing 40 nodes,testing 60 nodes,testing 80 nodes,AVG
+mutation_thd:0.1,60.0,71.0,45.0,65.0,60.25
+mutation_thd:0.2,66.0,26.0,64.0,44.0,50.0
+mutation_thd:0.3,12.0,31.0,36.0,56.0,33.75
+mutation_thd:0.4,70.0,68.0,48.0,48.0,58.5
+mutation_thd:0.5,47.0,26.0,26.0,27.0,31.5
+mutation_thd:0.6,32.0,62.0,3.0,32.0,32.25
+mutation_thd:0.7,19.0,20.0,60.0,38.0,34.25
+mutation_thd:0.8,39.0,15.0,37.0,53.0,36.0
+mutation_thd:0.9,3.0,55.0,14.0,24.0,24.0
+mutation_thd:1.0,24.0,29.0,64.0,59.0,44.0
