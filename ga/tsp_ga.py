@@ -2,12 +2,16 @@ import random
 from itertools import permutations
 import random
 import pandas as pd
+import datetime as dt
+import numpy as np
+
+TIMES_EXPLORING = 100
 
 class TSPGA:
-    def __init__(self, nodes_list, edges_w_list, population_number,*, crossover_proportion = 0.7,crossover_thd = None, mutation_thd = 0.1, exploration_prob = 0.1):
+    def __init__(self, nodes_list, edges_w_list, population_prop=0.5,*, crossover_proportion = 0.7,crossover_thd = None, mutation_thd = 0.1, exploration_prob = 0.1):
         self.nodes_list = nodes_list
         self.edges_w_list = edges_w_list
-        self.population_number= population_number
+        self.population_number= int(len(nodes_list)*population_prop)
         
         self.crossover_thd = crossover_thd
         self.crossover_proportion = crossover_proportion
@@ -20,10 +24,17 @@ class TSPGA:
         
         self.population = self.__get_random_dnas()
         self.step_number = 0
-    def step(self):
+    def __drop_duplicates(self):
+        unique_list_of_lists = [list(t) for t in set(tuple(lst) for lst in self.population)]
+        self.population = unique_list_of_lists
 
+    def step(self):
+        
         new_members = self.__crossover_and_mutation()
         self.population += new_members
+
+        # Crossover could generates same items 
+        self.__drop_duplicates()
         
         cost_list = list(map(lambda dna: self.__evaluate_cost_dna(dna),self.population))
         fitness_list = self.__get_fitness_values(cost_list)
@@ -44,6 +55,22 @@ class TSPGA:
         
         return most_probable_populations, mpp_cost_list
 
+    def run(self):
+        steps =[]
+        costs = []
+        best_tour = []
+        times = []
+        while len(costs) < TIMES_EXPLORING or  np.std(costs[-TIMES_EXPLORING:]) != 0:
+            new_population, new_costs = self.step()
+            tour,cost = min(zip(new_population, new_costs), key=lambda el:el[1])
+            tour_edges = self.generate_sequential_pairs(tour)
+            
+            steps.append(self.step_number)
+            costs.append(cost)
+            best_tour.append(tour)
+            
+            times.append(dt.datetime.now())
+        return best_tour[-1], costs[-1]
     
     def __generate_dict_cost(self):
         
@@ -97,14 +124,14 @@ class TSPGA:
         probabilities_sum = sum(probabilities)
         normalized_probabilities = [p / probabilities_sum for p in probabilities]
 
-        exploration_idxs = random.sample(range(len(normalized_probabilities)), k=int(self.exploration_prob*len(normalized_probabilities)))
-
+        exploration_idxs = random.sample(range(len(normalized_probabilities)), k=int(self.exploration_prob*(self.population_number)))
+        
         # Forcing to preserve the element
         for idx in exploration_idxs:
-            normalized_probabilities[idx] = 1
+            probabilities[idx] = 1
         
     
-        return normalized_probabilities
+        return probabilities
 
 
     def __mutation(self, dna):
@@ -121,9 +148,6 @@ class TSPGA:
         return dna
         
     def __tradditional_crossover(self, dna_a, dna_b, crossover_thd = None):
-        """
-            crossover_thd is None then len(dna_a)//2
-        """
         if crossover_thd is None:
             crossover_thd = len(dna_a)//2
         

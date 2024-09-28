@@ -2,6 +2,10 @@ import random
 from itertools import permutations
 import random
 import pandas as pd
+import datetime as dt
+import numpy as np
+
+TIMES_EXPLORING = 100
 
 class TSPGA:
     def __init__(self, nodes_list, edges_w_list, population_prop=0.5,*, crossover_proportion = 0.7,crossover_thd = None, mutation_thd = 0.1, exploration_prob = 0.1):
@@ -51,6 +55,22 @@ class TSPGA:
         
         return most_probable_populations, mpp_cost_list
 
+    def run(self):
+        steps =[]
+        costs = []
+        best_tour = []
+        times = []
+        while len(costs) < TIMES_EXPLORING or  np.std(costs[-TIMES_EXPLORING:]) != 0:
+            new_population, new_costs = self.step()
+            tour,cost = min(zip(new_population, new_costs), key=lambda el:el[1])
+            tour_edges = self.generate_sequential_pairs(tour)
+            
+            steps.append(self.step_number)
+            costs.append(cost)
+            best_tour.append(tour)
+            
+            times.append(dt.datetime.now())
+        return best_tour[-1], costs[-1]
     
     def __generate_dict_cost(self):
         
