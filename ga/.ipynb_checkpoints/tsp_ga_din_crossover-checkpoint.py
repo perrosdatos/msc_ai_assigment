@@ -1,5 +1,5 @@
 import random
-from itertools import permutations
+from itertools import combinations
 import random
 import pandas as pd
 import datetime as dt
@@ -163,7 +163,7 @@ class TSPGA:
         new_members = []
         mutation_thd = self.mutation_thd
         
-        for dna_a, dna_b in list(permutations(
+        for dna_a, dna_b in list(combinations(
                                     random.sample(self.population, k=int(len(self.population)*self.crossover_proportion)),
                                     2
                                 )
