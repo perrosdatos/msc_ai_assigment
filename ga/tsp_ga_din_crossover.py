@@ -24,6 +24,10 @@ class TSPGA:
         
         self.population = self.__get_random_dnas()
         self.step_number = 0
+        
+        self.costs = []
+        self.steps = []
+        self.times = []
     def __drop_duplicates(self):
         unique_list_of_lists = [list(t) for t in set(tuple(lst) for lst in self.population)]
         self.population = unique_list_of_lists
@@ -70,6 +74,9 @@ class TSPGA:
             best_tour.append(tour)
             
             times.append(dt.datetime.now())
+        self.costs = self.costs+ costs
+        self.steps = self.steps+ steps
+        self.times = self.times+ times
         return best_tour[-1], costs[-1]
     
     def __generate_dict_cost(self):
