@@ -19,14 +19,17 @@
 | 1   | `1.- population_tunning.ipynb`       | Notebook for tuning the population parameters.          |
 | 2   | `2.- crossover_proportion field.ipynb` | Analysis of crossover proportion in genetic algorithms. |
 | 3   | `3.- mutation_thd.ipynb`             | Study of mutation threshold effects on optimization.    |
-| 4   | `4.- exploration_prob.ipynb`         | Exploration probability settings and their impacts.     |
+| 4   | `4.- exploration_prob.ipynb`         | Exploration param hyp-tunning.     |
 | 5   | `5 Notebook for testing.ipynb`       | Testing GA-P Using randomized samples. (Testing with different sizes)   |
 | 6   | `6.-ComparingAlgorithms.ipynb`       | Comparison of different algorithms' performance (Data Generation).        |
 | 7   | `7-Final_graphs.ipynb`               | Generation of final visualizations and graphs to compare different algorithms approach.          |
-| 8   | `8.- Numerical Results Replication.ipynb` | Replication and verification of numerical results (Will be used to validate results in our work).     |
+| 8   | `8.- Numerical Results Replication.ipynb` | Replication and verification of numerical results (Will be used to validate results in our work).|
 
+# Libraries
 
-
+```shell
+pip install -r requirements.txt
+```
 
 ## Overview
 

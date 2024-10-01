@@ -1,3 +1,7 @@
 networkx
 numpy
 pandas
+seaborn
+scipy
+tqdm
+

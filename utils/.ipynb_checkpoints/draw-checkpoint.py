@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import networkx as nx
+import math
 
 def draw_custom_weighted_graph(node_list, edge_weight_list, edge_route = [], figsize=(30,30)):
     """
@@ -19,6 +20,8 @@ def draw_custom_weighted_graph(node_list, edge_weight_list, edge_route = [], fig
 
     # Add edges with weights
     for (u, v, w) in edge_weight_list:
+        if w == math.inf:
+            continue
         if ((u,v) in edge_route) or ((v,u) in edge_route):
             G.add_edge(u, v, chosen = 1, weight=w)
         else:
