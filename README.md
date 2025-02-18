@@ -7,12 +7,15 @@
 
 ### Authors
 - Gonzalez Juan Carlos
-- Batini Dhanwanth
-- Bhargavi Chadalawada
-- Divya Komati
 
 **Date:** September 30, 2024
 
+
+**Final Report:** [TARI29_Assignment_report___team_15.pdf](TARI29_Assignment_report___team_15.pdf)
+
+**Repository:** [msc_ai_assigment](https://github.com/perrosdatos/msc_ai_assigment)
+
+---
 
 | No. | Notebook Name                        | Description                                             |
 |-----|--------------------------------------|---------------------------------------------------------|
@@ -33,14 +36,11 @@ pip install -r requirements.txt
 
 ## Overview
 
-### `ga/tsp_ga.py`
-This corresponds to the **GA-N** algorithm in the written work. It implements a Genetic Algorithm (GA) using a **STATIC \|v\|//2 CUT CROSSOVER**.
+This repository contains the implementation and analysis of evolutionary algorithms applied to the Travelling Salesman Problem (TSP). The report describes two Genetic Algorithm (GA) approaches:
+- **GA-N:** Implements a Genetic Algorithm with a static (fixed) crossover point (`|V|/2`).
+- **GA-P:** Implements a Genetic Algorithm with a dynamic (randomized) crossover proportion.
 
-### `ga/tsp_ga_din_crossover.py`
-This corresponds to the **GA-P** algorithm in the written work, using a dynamic crossover proportion.
-
-### `branch_bound/TSP.py`
-Contains the implementation of the Branch and Bound algorithm, which was copied and modified from the [tsp-solver repository](https://github.com/mostafabahri/tsp-solver/).
+In addition, a Branch and Bound algorithm (modified from [tsp-solver](https://github.com/mostafabahri/tsp-solver/)) is included for performance comparison.
 
 
 ## Usage Examples
